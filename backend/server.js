@@ -26,15 +26,22 @@ app.post("/chat", verifyUser,
 
             const response = await askGemini(message);
 
-            await db
-                .collection("users")
-                .doc(req.user.uid)
-                .collection("journals")
-                .add({
-                    message,
-                    response,
-                    createdAt: new Date(),
-                });
+            // Persistence is best-effort: missing local credentials must not
+            // fail the request or crash the process.
+            try {
+                await db
+                    .collection("users")
+                    .doc(req.user.uid)
+                    .collection("journals")
+                    .add({
+                        message,
+                        response,
+                        createdAt: new Date(),
+                    });
+            } catch (dbError) {
+                console.error("Failed to save journal entry:", dbError.message);
+            }
+
             res.json({
                 success: true,
                 response,
@@ -58,6 +65,11 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 8080;
+
+process.on("unhandledRejection", (reason) => {
+    console.error("Unhandled rejection:", reason);
+});
+
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on ${PORT}`);
 });
