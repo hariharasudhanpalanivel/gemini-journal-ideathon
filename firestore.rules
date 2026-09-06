@@ -1,13 +1,20 @@
-rules_version='2'
+rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Each user may only read their own data. All writes go through the
-    // backend (Admin SDK, which bypasses these rules) so clients can't
-    // write directly or tamper with entries.
-    match /users/{userId}/{document=**} {
-      allow read: if request.auth != null && request.auth.uid == userId;
-      allow write: if false;
+
+    match /users/{userId} {
+
+      allow read, write:
+      if request.auth != null &&
+         request.auth.uid == userId;
+
+      match /journals/{journalId} {
+
+        allow read, write:
+        if request.auth != null &&
+           request.auth.uid == userId;
+      }
     }
   }
 }
