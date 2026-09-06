@@ -31,7 +31,7 @@ app.post("/chat", verifyUser,
             try {
                 await db
                     .collection("users")
-                    .doc(req.user.uid)
+                    .doc('req.user.uid')
                     .collection("journals")
                     .add({
                         message,

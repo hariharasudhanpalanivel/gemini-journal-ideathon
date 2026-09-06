@@ -12,7 +12,7 @@ export default function Journal() {
         const token = await auth.currentUser?.getIdToken();
 
         const result = await axios.post(
-            `/chat`,
+            `https://gemini-journal-234422397989.asia-south1.run.app/chat`,
             {
                 message,
             },
