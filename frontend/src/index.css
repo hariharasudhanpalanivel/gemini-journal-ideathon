@@ -12,6 +12,10 @@
   --danger-bg: rgba(198, 40, 40, 0.08);
   --radius: 14px;
   --shadow: 0 4px 20px rgba(26, 21, 35, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px rgba(90, 60, 180, 0.18);
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
 
@@ -39,6 +43,10 @@
     --danger: #ff6b6b;
     --danger-bg: rgba(255, 107, 107, 0.12);
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    --glass-bg: rgba(30, 26, 39, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   }
 }
 

@@ -14,7 +14,7 @@ export default function Login() {
 
   return (
     <div className="login-shell">
-      <div className="login-card card">
+      <div className="login-card card glass">
         <h1>Personal Gemini Journal</h1>
         <p className="text-muted">
           A private space to brainstorm and journal with Gemini.

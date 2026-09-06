@@ -16,6 +16,12 @@ const MOOD_COLOR: Record<string, string> = {
     negative: "#c62828",
 };
 
+const MOOD_EMOJI: Record<string, string> = {
+    positive: "😊",
+    neutral: "😐",
+    negative: "😔",
+};
+
 type JournalEntry = {
     id: string;
     mood?: string;
@@ -49,18 +55,35 @@ function MoodTrend() {
     }
 
     return (
-        <div className="card stack">
+        <div className="card glass mood-card stack">
             <h3>Mood Trend</h3>
-            <div className="mood-dots">
-                {entries.map((entry) => (
-                    <span
-                        key={entry.id}
-                        className="mood-dot"
-                        title={`${entry.mood ?? "unknown"} - ${entry.createdAt?.toDate().toLocaleString() ?? ""}`}
-                        style={{
-                            background: MOOD_COLOR[entry.mood ?? ""] ?? "#ccc",
-                        }}
-                    />
+            <div className="mood-timeline">
+                {entries.map((entry) => {
+                    const color = MOOD_COLOR[entry.mood ?? ""] ?? "#ccc";
+                    return (
+                        <span
+                            key={entry.id}
+                            className="mood-pip"
+                            title={`${entry.mood ?? "unknown"} - ${entry.createdAt?.toDate().toLocaleString() ?? ""}`}
+                            style={{
+                                borderColor: color,
+                                boxShadow: `0 0 12px ${color}66`,
+                            }}
+                        >
+                            {MOOD_EMOJI[entry.mood ?? ""] ?? "❔"}
+                        </span>
+                    );
+                })}
+            </div>
+            <div className="mood-legend">
+                {(["positive", "neutral", "negative"] as const).map((m) => (
+                    <span key={m}>
+                        <span
+                            className="mood-dot"
+                            style={{ background: MOOD_COLOR[m] }}
+                        />
+                        {m}
+                    </span>
                 ))}
             </div>
         </div>
