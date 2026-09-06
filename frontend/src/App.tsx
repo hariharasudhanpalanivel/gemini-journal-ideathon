@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, type User } from "firebase/auth";
 
+import "./App.css";
 import { auth } from "./firebase";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -19,10 +20,14 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="login-shell">
+        <p className="text-muted">Loading...</p>
+      </div>
+    );
   }
 
-  return user ? <Dashboard /> : <Login />;
+  return user ? <Dashboard user={user} /> : <Login />;
 }
 
 export default App;

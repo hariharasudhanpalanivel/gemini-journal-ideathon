@@ -5,15 +5,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
-
-      const result = await signInWithPopup(auth, provider);
-
-      const token = await result.user.getIdToken();
-
-      console.log("User:", result.user);
-      console.log("Token:", token);
-
-      alert(`Welcome ${result.user.displayName}`);
+      await signInWithPopup(auth, provider);
     } catch (err) {
       console.error(err);
       alert("Login Failed");
@@ -21,29 +13,16 @@ export default function Login() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        gap: "20px",
-      }}
-    >
-      <h1>Personal Gemini Journal</h1>
-
-      <p>AI Powered Secure Journaling App</p>
-
-      <button
-        onClick={handleLogin}
-        style={{
-          padding: "10px 20px",
-          cursor: "pointer",
-        }}
-      >
-        Sign in with Google
-      </button>
+    <div className="login-shell">
+      <div className="login-card card">
+        <h1>Personal Gemini Journal</h1>
+        <p className="text-muted">
+          A private space to brainstorm and journal with Gemini.
+        </p>
+        <button className="btn" onClick={handleLogin}>
+          Sign in with Google
+        </button>
+      </div>
     </div>
   );
 }
